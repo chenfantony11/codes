@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "func.h"
 
-int Array[5][4] = {
+static int Array[5][4] = {
     {0, 0, 1, 0},
     {0, 0, 0, 0},
     {0, 0, 1, 0},
@@ -9,9 +9,9 @@ int Array[5][4] = {
     {0, 0, 0, 1},
 };
 
-int Book[5][4] = {};
-int startx = 0, starty = 0, endx = 3, endy = 2;
-int min = 1000000;
+static int Book[5][4] = {};
+static int startx = 0, starty = 0, endx = 3, endy = 2;
+static int min = 1000000;
 /*
  * @brief   Deep first search algorithm
  * @param   step: step number
@@ -46,6 +46,7 @@ int dfs_test() {
     int step = 0;
     Book[startx][starty] = 1;
     dfs(startx, starty, 0);
+    printf("dfs test:\n");
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 4; j++) {
             printf("%d ", Book[i][j]);

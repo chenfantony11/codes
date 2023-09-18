@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include "func.h"
+
+// map
+static int Array[5][4] = {
+    {0, 0, 1, 0},
+    {0, 0, 0, 0},
+    {0, 0, 1, 0},
+    {0, 1, 0, 0},
+    {0, 0, 0, 1},
+};
+
+static int Book[5][4] = {};
+static int startx = 0, starty = 0, endx = 3, endy = 2;
+static int min = 1000000;
+
+struct queue_node {
+    int x;
+    int y;
+    int s;
+};
+
+void enqueue(struct queue_node *queue, int *head, int *tail, int x, int y, int s) {
+    queue[*tail].x = x;
+    queue[*tail].y = y;
+    queue[*tail].s = s;
+    *tail = (*tail + 1) % 10000;
+}
+
+void dequeue(struct queue_node *queue, int *head, int *tail) {
+    *head = (*head + 1) % 10000;
+}
+
+/*
+ * @brief   breadth first search algorithm
+ * @param   step: step number
+ * find the short path from the start node to the end node
+ */ 
+void bfs(int x, int y, int step) {
+    /* next step, right, down, left, up */
+    int next[4][2] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    struct queue_node queue[10000];
+    int head = 0, tail = 0, found = 0;
+    enqueue(queue, &head, &tail, x, y, step);
+    Book[x][y] = 1;
+
+    while (head < tail) {
+        for (int i = 0; i < 4; i++) {
+            int newx = queue[head].x + next[i][0];
+            int newy = queue[head].y + next[i][1];
+
+            if (newx < 0 || newy < 0 || newx >= 5 || newy >= 4) {
+                continue;
+            }
+            if (Array[newx][newy] == 0 && Book[newx][newy] == 0) {
+                // add new node to queue
+                enqueue(queue, &head, &tail, newx, newy, queue[head].s + 1);
+                Book[newx][newy] = 1;
+            }
+            if (newx == endx && newy == endy) {
+                if (queue[head].s + 1 < min) {
+                    min = queue[head].s + 1;
+                }
+                found = 1;
+                break;
+            }
+        }
+        if (found == 1) {
+            break;
+        }
+        dequeue(queue, &head, &tail);
+    }
+    return;
+}
+
+int bfs_test() {
+    int step = 0;
+    bfs(startx, starty, 0);
+    printf("bfs test: \n");
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 4; j++) {
+            printf("%d ", Book[i][j]);
+        }
+        printf("\n");
+    }
+    printf("min: %d\n", min);
+    return 0;
+}

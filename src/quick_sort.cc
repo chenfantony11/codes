@@ -44,6 +44,7 @@ void quick_sort(int* A, int left, int right) {
 int quick_sort_test() {
     int Array[] = {6, 1, 5, 4, 9, 3, 7, 2, 0, 8, 11, 10};
     quick_sort(Array, 0, sizeof(Array)/ sizeof(int) - 1);
+    printf("quick sort test:\n");
     print_A(Array, 0, sizeof(Array)/sizeof(int) - 1);
     return 0;
 }
