@@ -6,6 +6,10 @@
  * heap: array
  * use big (or small) root heap to sort out the biggest number
  * each time, swap the root node with the last node
+ * 
+ * heap sort always can be used to get the top k number from list.
+ * just need to build a heap with the top k size array, and then
+ *  use heap sort. the top one will be the top k number.
  */
 static int array[10] = {1, 6, 3, 4, 7, 8, 5, 2, 10, 9};
 static int size = sizeof(array) / sizeof(int);
