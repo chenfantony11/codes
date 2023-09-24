@@ -8,5 +8,7 @@ int main() {
     bfs_test();
     graph_bfs_test();
     heap_sort_test();
+    floyd_warshall_test();
+    dijkstra_test();
     return 0;
 }

@@ -6,4 +6,6 @@ int graph_dfs_test();
 int bfs_test();
 int graph_bfs_test();
 int heap_sort_test();
+int floyd_warshall_test();
+int dijkstra_test();
 #endif
