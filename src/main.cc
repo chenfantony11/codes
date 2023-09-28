@@ -10,5 +10,6 @@ int main() {
     heap_sort_test();
     floyd_warshall_test();
     dijkstra_test();
+    bellman_ford_test();
     return 0;
 }

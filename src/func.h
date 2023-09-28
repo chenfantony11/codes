@@ -8,4 +8,5 @@ int graph_bfs_test();
 int heap_sort_test();
 int floyd_warshall_test();
 int dijkstra_test();
+int bellman_ford_test();
 #endif
