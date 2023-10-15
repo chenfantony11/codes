@@ -1,15 +1,17 @@
-#include <stdio.h>
+#include <iostream>
+#include <vector>
 #include "func.h"
 
-void print_A(int* A, int left, int size) {
-    int i = 0;
-    for (; i <= size; i++) {
-        printf("%d ", A[left + i]);
+template <typename T>
+void print_A(T& A) {
+    for (int i = 0; i < A.size(); i++) {
+        std::cout << A[i] << " ";
     }
-    printf("\n");
+    std::cout << std::endl;
 }
 
-void quick_sort(int* A, int left, int right) {
+template <typename T>
+void quick_sort(T& A, int left, int right) {
     int pivot = A[left];
     int i = left + 1, j = right, pos, tmp;
     if (left >= right) {
@@ -42,9 +44,9 @@ void quick_sort(int* A, int left, int right) {
 }
 
 int quick_sort_test() {
-    int Array[] = {6, 1, 5, 4, 9, 3, 7, 2, 0, 8, 11, 10};
-    quick_sort(Array, 0, sizeof(Array)/ sizeof(int) - 1);
-    printf("quick sort test:\n");
-    print_A(Array, 0, sizeof(Array)/sizeof(int) - 1);
+    std::vector<int> vec = {6, 1, 5, 4, 9, 3, 7, 2, 0, 8, 11, 10};
+    quick_sort(vec, 0, 11);
+    std::cout << "quick sort test:" << std::endl;
+    print_A(vec);
     return 0;
 }
