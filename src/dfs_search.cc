@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include "func.h"
 
 static int Array[5][4] = {
@@ -46,13 +46,13 @@ int dfs_test() {
     int step = 0;
     Book[startx][starty] = 1;
     dfs(startx, starty, 0);
-    printf("dfs test:\n");
+    std::cout << "dfs test:" << std::endl;
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 4; j++) {
-            printf("%d ", Book[i][j]);
+            std::cout << Book[i][j] << " ";
         }
-        printf("\n");
+        std::cout << std::endl;
     }
-    printf("min: %d\n", min);
+    std::cout << "min: " << min << std::endl;
     return 0;
 }
