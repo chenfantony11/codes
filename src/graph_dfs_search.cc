@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include "func.h"
 
 /*
@@ -40,7 +40,7 @@ public:
     */ 
     void dfs(int v) {
         /* current vertex */
-        printf("%d ", v);
+        std::cout << v << " ";
         /* if all vertex have been visited, return */
         if (v == _v) {
             return;
@@ -65,20 +65,19 @@ public:
  */
 int graph_dfs_test() {
     /* build graph */
-    Graph* g = new Graph(5, 1);
-    g->addEdge(1, 3);
-    g->addEdge(1, 2);
-    g->addEdge(2, 4);
-    g->addEdge(3, 5);
-    g->addEdge(1, 5);
+    Graph g = Graph(5, 1);
+    g.addEdge(1, 3);
+    g.addEdge(1, 2);
+    g.addEdge(2, 4);
+    g.addEdge(3, 5);
+    g.addEdge(1, 5);
 
     /* start from 1 */
-    g->enterVertex(1);
+    g.enterVertex(1);
 
-    printf("graph dfs test:\n");
+    std::cout << "graph dfs test:" << std::endl;
     /* dfs */
-    g->dfs(1);
-    delete g;
-    printf("\n");
+    g.dfs(1);
+    std::cout << std::endl;
     return 0;
 }
