@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 
 /*
  * @brief   heap sort algorithm
@@ -55,7 +55,6 @@ int create_big_root_heap(int* array, int size) {
     int i;
     /* build a big root heap, from the non-leaf node */
     for (i = size / 2 - 1; i >= 0; i--) {
-        printf("siftdown %d\n", i);
         siftdown(i, size);
     }
     return 0;
@@ -68,6 +67,11 @@ int heap_sort(int* array, int size) {
 
     for (i = size - 1; i >= 0;) {
         swap(0, i);
+        /*
+         * due to array has been heapified,
+         * after swap out, only the root node
+         * need to shfitdown to maintain heap property
+         */
         siftdown(0, i--);
     }
     return 0;
@@ -77,10 +81,10 @@ int heap_sort_test() {
     int i = 0;
 
     heap_sort(array, size);
-    printf("heap sort test: %d\n", size);
+    std::cout << "heap sort test: " << size << std::endl;
     for (i = 0; i < size; i++) {
-        printf("%d ", array[i]);
+        std::cout << array[i] << " ";
     }
-    printf("\n");
+    std::cout << std::endl;
     return 0;
 }
