@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include "func.h"
 
 /*
@@ -43,7 +43,7 @@ public:
         int head = 0, tail = 0;
         queue[tail++] = v;
         /* current vertex */
-        printf("%d ", v);
+        std::cout << v << " ";
         while(head < tail) {
             int v = queue[head++];
             /* if all vertex have been visited, return */
@@ -54,7 +54,7 @@ public:
             /* if vertex have edge, visit it */
             for (int i = v + 1; i <= _v; i++) {
                 if (_matrix[v][i] &&!_visited[i]) {
-                    printf("%d ", i);
+                    std::cout << i << " ";
                     _visited[i] = true;
                     queue[tail++] = i;
                 }
@@ -71,20 +71,19 @@ public:
  */
 int graph_bfs_test() {
     /* build graph */
-    Graph* g = new Graph(5, 1);
-    g->addEdge(1, 3);
-    g->addEdge(1, 2);
-    g->addEdge(2, 4);
-    g->addEdge(3, 5);
-    g->addEdge(1, 5);
+    Graph g = Graph(5, 1);
+    g.addEdge(1, 3);
+    g.addEdge(1, 2);
+    g.addEdge(2, 4);
+    g.addEdge(3, 5);
+    g.addEdge(1, 5);
 
     /* start from 1 */
-    g->enterVertex(1);
+    g.enterVertex(1);
 
-    printf("graph bfs test:\n");
+    std::cout << "graph bfs test:" << std::endl;
     /* dfs */
-    g->bfs(1);
-    delete g;
-    printf("\n");
+    g.bfs(1);
+    std::cout << std::endl;
     return 0;
 }
