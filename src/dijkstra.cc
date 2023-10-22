@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include "func.h"
 
 #define MAX_INT 1000000
@@ -107,27 +107,27 @@ public:
 */
 
 int dijkstra_test() {
-    Graph* g = new Graph(7);
-    g->addEdge(1, 2, 1, MAX_INT);
-    g->addEdge(1, 3, 12, MAX_INT);
-    g->addEdge(1, 4, MAX_INT, MAX_INT);
-    g->addEdge(1, 5, MAX_INT, MAX_INT);
-    g->addEdge(1, 6, MAX_INT, MAX_INT);
-    g->addEdge(2, 3, 9, MAX_INT);
-    g->addEdge(2, 4, 3, MAX_INT);
-    g->addEdge(2, 5, MAX_INT, MAX_INT);
-    g->addEdge(2, 6, MAX_INT, MAX_INT);
-    g->addEdge(3, 4, MAX_INT, 4);
-    g->addEdge(3, 5, 5, MAX_INT);
-    g->addEdge(3, 6, MAX_INT, MAX_INT);
-    g->addEdge(4, 5, 13, MAX_INT);
-    g->addEdge(4, 6, 15, MAX_INT);
-    g->addEdge(5, 6, 4, MAX_INT);
+    Graph g = Graph(7);
+    g.addEdge(1, 2, 1, MAX_INT);
+    g.addEdge(1, 3, 12, MAX_INT);
+    g.addEdge(1, 4, MAX_INT, MAX_INT);
+    g.addEdge(1, 5, MAX_INT, MAX_INT);
+    g.addEdge(1, 6, MAX_INT, MAX_INT);
+    g.addEdge(2, 3, 9, MAX_INT);
+    g.addEdge(2, 4, 3, MAX_INT);
+    g.addEdge(2, 5, MAX_INT, MAX_INT);
+    g.addEdge(2, 6, MAX_INT, MAX_INT);
+    g.addEdge(3, 4, MAX_INT, 4);
+    g.addEdge(3, 5, 5, MAX_INT);
+    g.addEdge(3, 6, MAX_INT, MAX_INT);
+    g.addEdge(4, 5, 13, MAX_INT);
+    g.addEdge(4, 6, 15, MAX_INT);
+    g.addEdge(5, 6, 4, MAX_INT);
 
-    g->initDis();
-    g->initBook();
+    g.initDis();
+    g.initBook();
 
-    printf("dijkstra test:\n");
+    std::cout << "dijkstra test:" << std::endl;
     int u = 1;
     for (int i=1; i < 7; i++) {
         int min = MAX_INT;
@@ -137,28 +137,27 @@ int dijkstra_test() {
          * book is used to record the point has been visited.
          */
         for (int j=1; j < 7; j++) {
-            if (g->getBook()[j] == 0 && g->getDis()[j] < min) {
-                min = g->getDis()[j];
+            if (g.getBook()[j] == 0 && g.getDis()[j] < min) {
+                min = g.getDis()[j];
                 u = j;
             }
         }
-        g->getBook()[u] = 1;
+        g.getBook()[u] = 1;
         /* update the shortest path relative to u */
         for (int v=1; v < 7; v++) {
-            if (g->getMetrix()[u][v] < MAX_INT) {
-                if (g->getDis()[v] > g->getDis()[u] + g->getMetrix()[u][v]) {
-                    g->getDis()[v] = g->getDis()[u] + g->getMetrix()[u][v];
-                    printf("u: %d, v: %d, dis: %d\n", u, v, g->getDis()[v]);
+            if (g.getMetrix()[u][v] < MAX_INT) {
+                if (g.getDis()[v] > g.getDis()[u] + g.getMetrix()[u][v]) {
+                    g.getDis()[v] = g.getDis()[u] + g.getMetrix()[u][v];
+                    std::cout << "u: " << u << ", v: " << v << ", dis: " 
+                              << g.getDis()[v] << std::endl;
                 }
             }
         }
     }
     
     for (int j=1; j < 7; j++) {
-        printf("%d ", g->getDis()[j]);
+        std::cout << g.getDis()[j] << " ";
     }
-    printf("\n");
-
-    delete g;
+    std::cout << std::endl;
     return 0;
 }
