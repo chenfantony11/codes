@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include "func.h"
 
 #define MAX_INT 1000000
@@ -89,21 +89,21 @@ public:
 */
 
 int bellman_ford_test() {
-    Graph2* g = new Graph2(6, 10);
-    g->addEdge(1, 2, -3);
-    g->addEdge(1, 5, 5);
-    g->addEdge(2, 3, 2);
-    g->addEdge(3, 4, 3);
-    g->addEdge(4, 5, 2);
+    Graph2 g = Graph2(6, 10);
+    g.addEdge(1, 2, -3);
+    g.addEdge(1, 5, 5);
+    g.addEdge(2, 3, 2);
+    g.addEdge(3, 4, 3);
+    g.addEdge(4, 5, 2);
 
-    g->initDis();
+    g.initDis();
 
-    printf("bellman-ford test:\n");
+    std::cout << "bellman-ford test:" << std::endl;
     /** for each vertex */
     for (int i=1; i < 6; i++) {
         bool update = false;
-        for (int j=0; j < g->getEdgeNum(); j++) {
-            update = g->updateDis(j);
+        for (int j=0; j < g.getEdgeNum(); j++) {
+            update = g.updateDis(j);
         }
         if (!update) {
             break;
@@ -111,21 +111,20 @@ int bellman_ford_test() {
     }
     
     int have_circle = false;
-    for (int i=0; i < g->getEdgeNum(); i++) {
-        if (g->checkDisCircle(i)) {
+    for (int i=0; i < g.getEdgeNum(); i++) {
+        if (g.checkDisCircle(i)) {
             have_circle = true;
             break;
         }
     }
     if (have_circle) {
-        printf("have circle\n");
+        std::cout << "have circle" << std::endl;
     } else {
         for (int i=1; i < 6; i++) {
-            printf("%d ", g->getDis(i));
+            std::cout << g.getDis(i) << " ";
         }
     }
-    printf("\n");
+    std::cout << std::endl;
 
-    delete g;
     return 0;
 }
