@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include "func.h"
 
 #define MAX_INT 1000000
@@ -45,29 +45,28 @@ public:
 */
 
 int floyd_warshall_test() {
-    Graph* g = new Graph(5);
-    g->addEdge(1, 2, 2, MAX_INT);
-    g->addEdge(1, 3, 6, 7);
-    g->addEdge(1, 4, 4, 5);
-    g->addEdge(2, 3, 3, MAX_INT);
-    g->addEdge(3, 4, 1, 12);
-    g->addEdge(2, 4, MAX_INT, MAX_INT);
+    Graph g = Graph(5);
+    g.addEdge(1, 2, 2, MAX_INT);
+    g.addEdge(1, 3, 6, 7);
+    g.addEdge(1, 4, 4, 5);
+    g.addEdge(2, 3, 3, MAX_INT);
+    g.addEdge(3, 4, 1, 12);
+    g.addEdge(2, 4, MAX_INT, MAX_INT);
 
-    int** e = g->getMetrix();
+    int** e = g.getMetrix();
     
-    printf("floyd warshall test:\n");
+    std::cout << "floyd warshall test:" << std::endl;
     for (int i=1; i < 5; i++) {
         for (int j=1; j < 5; j++) {
             if(e[i][j] == MAX_INT) {
-                printf("  ");
+                std::cout << "  ";
             } else {
-                printf("%d ", e[i][j]);
+                std::cout << e[i][j] << " ";
             }
         }
-        printf("\n");
+        std::cout << std::endl;
     }
 
-    printf("after sort:\n");
     /**
      * make a new vertex from number 1 as the mid point,
      * check the a -> 1 ->b if short than a -> b, if shorter,
@@ -83,13 +82,12 @@ int floyd_warshall_test() {
         }
     }
 
+    std::cout << "after sort:" << std::endl;
     for (int i=1; i < 5; i++) {
         for (int j=1; j < 5; j++) {
-            printf("%d ", e[i][j]);
+            std::cout << e[i][j] << " ";
         }
-        printf("\n");
+        std::cout << std::endl;
     }
-
-    delete g;
     return 0;
 }
